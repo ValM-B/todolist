@@ -17,6 +17,8 @@ export const finishedTasks = {
 		if(event.currentTarget.checked){
 			
 			label.className ="checked";
+		} else {
+			label.className = "";
 		}
 	
 
