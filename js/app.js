@@ -1,10 +1,11 @@
-import { newList } from "./newList.js"
+import { newList } from "./newList.js";
+import {finishedTasks} from "./finishedTasks.js";
 
 const app = {
 
     init : function(){
     newList.init();
-    console.log("check");
+    finishedTasks.init();
     }
 }
 
