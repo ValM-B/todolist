@@ -12,6 +12,7 @@ export const newList = {
     handleClick : function(event){
         const btnId = event.currentTarget.id;
         const container = document.querySelector(`.col__${btnId}`)
+        console.log(container);
         newList.newDiv = document.createElement("div");
         newList.newDiv.classList.add("col__item");
         const h2 = document.createElement("h2");
