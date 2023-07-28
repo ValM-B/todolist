@@ -17,16 +17,22 @@ nav{
     justify-content: space-between;
 }
 
-button{
+.btn-primary{
     border-radius: 5px;
     border : solid 1px #ca89f6;
     color :#8841b8;
     background-color: white;
     padding: 0.8rem;
     font-size: 1.3rem;
-    width: 23%;
+    width: 100%;
     text-transform: uppercase;
 
+}
+
+.btn-primary:hover{
+    background-color: #8841b8;
+    color :white;
+    border : solid 1px #ca89f6;
 }
 
 .btn_remove{
