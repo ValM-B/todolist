@@ -28,11 +28,12 @@ class CategoryController extends Controller
             'picture' => 'required|string'
         ]);
 
-        Category::create($validated);
+        $category = Category::create($validated);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Category created!'
+            'message' => 'Category created!',
+            'category' => $category
         ], 201); 
     
     }
@@ -70,5 +71,10 @@ class CategoryController extends Controller
     {
         $categoryToDelete = Category::findOrFail($id);
         $categoryToDelete->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Task deleted!'
+        
+        ]);
     }
 }

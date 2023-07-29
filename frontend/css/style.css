@@ -35,6 +35,12 @@ nav{
     border : solid 1px #ca89f6;
 }
 
+footer .btn{
+    width: auto;
+    font-size: 0.6rem;
+    margin-top: 5rem;
+}
+
 .btn_remove{
     width: 100%;
     background-color: #8841b8;

@@ -1,8 +1,9 @@
 import {finishedTasks} from "./finishedTasks.js";
 
 export const newList = {
+    categoryId : null,
     init :function(){
-        const btns = document.querySelectorAll("button");
+        const btns = document.querySelectorAll(".add-list");
         
         for (const btn of btns) {
             btn.addEventListener("click", newList.handleClick);
@@ -10,17 +11,20 @@ export const newList = {
     },
 
     handleClick : function(event){
+
         const btnId = event.currentTarget.id;
-        const container = document.querySelector(`.col__${btnId}`)
-        console.log(container);
-        newList.newDiv = document.createElement("div");
-        newList.newDiv.classList.add("col__item");
-        const h2 = document.createElement("h2");
-        newList.title = prompt("Entrer le nom de la liste");
-        h2.textContent = newList.title;
-        newList.newDiv.append(h2);
-        container.append(newList.newDiv);
-        newList.createTask()
+        newList.categoryId = btnId.slice(9)
+        console.log(newList.categoryId);
+        // const container = document.querySelector(`.${btnId}`)
+        // console.log(container);
+        // newList.newDiv = document.createElement("div");
+        // newList.newDiv.classList.add("col__item");
+        // const h2 = document.createElement("h2");
+        // newList.title = prompt("Entrer le nom de la liste");
+        // h2.textContent = newList.title;
+        // newList.newDiv.append(h2);
+        // container.append(newList.newDiv);
+        // newList.createTask()
 
     },
 

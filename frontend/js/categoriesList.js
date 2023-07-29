@@ -1,4 +1,4 @@
-
+import { newList } from "./newList.js";
 export const categoriesList ={
 
     container : null,
@@ -9,7 +9,7 @@ export const categoriesList ={
         categoriesList.getData()
             .then(data => {
                 data.forEach(category => {
-                   
+                
                     categoriesList.addToCategoriesList(category);
                 });
             })
@@ -25,13 +25,15 @@ export const categoriesList ={
     },
 
     addToCategoriesList: function(category){
-   
+
         const newCol = document.createElement("div");
         newCol.classList.add("col-md-3", "categ-id-"+category.id);
         categoriesList.container.append(newCol);
 
         const btnCateg = document.createElement("button");
-        btnCateg.classList.add("btn", "btn-primary");
+        btnCateg.classList.add("btn", "btn-primary", "add-list");
+        btnCateg.setAttribute("data-bs-target", "#listModalToggle");
+        btnCateg.setAttribute("data-bs-toggle","modal");
         btnCateg.id = "categ-id-"+category.id;
         btnCateg.textContent =category.name;
         newCol.append(btnCateg);
@@ -39,7 +41,8 @@ export const categoriesList ={
         const btnIcon = document.createElement("i");
         btnIcon.classList.add ("fa-solid", category.picture);
         btnCateg.prepend(btnIcon);
-        console.log(categoriesList.container);
+        newList.init();
+     
     }
 
 }
