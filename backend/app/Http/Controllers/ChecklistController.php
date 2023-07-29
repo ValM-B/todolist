@@ -31,11 +31,12 @@ class ChecklistController extends Controller
             'category_id' => 'required|integer|exists:categories,id'
         ]);
 
-        Checklist::create($validated);
+        $checklist = Checklist::create($validated);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Checklist created!'
+            'message' => 'Checklist created!',
+            'checklist' => $checklist
         ], 201); 
     
     }
@@ -62,6 +63,7 @@ class ChecklistController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Checklist updated!'
+
         ]);
     }
 

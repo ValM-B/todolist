@@ -17,6 +17,9 @@ nav{
     justify-content: space-between;
 }
 
+i{
+    margin-right: 1rem;
+}
 .btn-primary{
     border-radius: 5px;
     border : solid 1px #ca89f6;

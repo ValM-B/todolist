@@ -22,42 +22,43 @@
     </div>
     <div class="modal fade" id="listModalToggle" aria-hidden="true" aria-labelledby="listModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
+            <div class="modal-content">
             <div class="modal-header">
-              <h2 class="modal-title fs-5" id="listModalToggleLabel">Nouvelle liste</h2>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h2 class="modal-title fs-5" id="listModalToggleLabel">Nouvelle liste</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               
                 <label class="form-label" for="list-name">Nom de la liste: </label>
                 <input class="form-control mb-4" type="text" name="name" id="list-name" required>
             </div>
             <div class="modal-footer">
+                <button class="btn btn-primary to-task-list" data-bs-target="#listModalToggle2" data-bs-toggle="modal">Ajouter une tache</button>
                 <button type="button" class="btn btn-primary add-list" data-bs-dismiss="modal">Valider</button>
-                <button class="btn btn-primary" data-bs-target="#listModalToggle2" data-bs-toggle="modal">Ajouter une tache</button>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
-      <div class="modal fade" id="listModalToggle2" aria-hidden="true" aria-labelledby="listModalToggleLabel2" tabindex="-1">
+        </div>
+        <div class="modal fade" id="listModalToggle2" aria-hidden="true" aria-labelledby="listModalToggleLabel2" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
+            <div class="modal-content">
             <div class="modal-header">
-              <h2 class="modal-title fs-5" id="listModalToggleLabel2">Ajouter une tâche</h2>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h2 class="modal-title fs-5" id="listModalToggleLabel2">Ajouter une tâche</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               
             </div>
             <div class="modal-body">
                 <label class="form-label" for="list-name">Nom de la tâche: </label>
-                <input class="form-control mb-4" type="text" name="name" id="list-name" required>
+                <input class="form-control mb-4" type="text" name="name" id="task-name" required>
                 <ul class="task-list"></ul>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-primary" data-bs-target="#listModalToggle" data-bs-toggle="modal">Valider</button>
-              <button class="btn btn-primary add-task" >Ajouter une nouvelle tâche</button>
+                <button class="btn btn-primary add-new-task" >Ajouter une nouvelle tâche</button>
+                <button class="btn btn-primary add-new-task" data-bs-target="#listModalToggle" data-bs-toggle="modal">Valider</button>
+                
             </div>
-          </div>
+            </div>
         </div>
-      </div>
+        </div>
     </main>
     <footer class=" d-flex justify-content-center">
         <div class="alert alert-success add-category-success" role="alert" hidden>

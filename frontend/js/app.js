@@ -11,6 +11,7 @@ const app = {
     addCategory.init();
     finishedTasks.init();
     deleteCategory.init();
+    newList.init();
 
     }
 }
