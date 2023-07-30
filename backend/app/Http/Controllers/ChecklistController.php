@@ -57,12 +57,13 @@ class ChecklistController extends Controller
         $checklist = Checklist::findOrFail($id);
         $validated = $request->validate([
             'name' => 'required|string|min:3|max:255',
-            'category_id' => 'required|integer|exists:categories,id'
+            'category_id' => 'integer|exists:categories,id'
         ]);
         $checklist->update($validated);
         return response()->json([
             'status' => 'success',
-            'message' => 'Checklist updated!'
+            'message' => 'Checklist updated!',
+            'checklist' => $checklist->load('category', 'tasks')
 
         ]);
     }

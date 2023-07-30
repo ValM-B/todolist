@@ -1,4 +1,4 @@
-import { checklistList } from "./checklictList.js";
+import { checklistList } from "./checklistList.js";
 import { newList } from "./newList.js";
 export const categoriesList ={
 

@@ -1,4 +1,4 @@
-import { checklistList } from "./checklictList.js";
+import { checklistList } from "./checklistList.js";
 import {finishedTasks} from "./finishedTasks.js";
 
 export const newList = {
@@ -22,10 +22,8 @@ export const newList = {
         }
         newList.btnTaskList= document.querySelector(".to-task-list");
         newList.btnTaskList.addEventListener("click", newList.handleClickTaskList);
-        console.log(newList.btnTaskList)
 
         newList.btnValidate= document.querySelector("#checklist-validate");
-        console.log(newList.btnValidate)
         newList.btnValidate.addEventListener("click", newList.handleClickValidate);
 
         newList.btnNewTask= document.querySelectorAll(".add-new-task");

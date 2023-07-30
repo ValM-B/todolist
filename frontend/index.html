@@ -17,48 +17,63 @@
 
     </header>
     <main>
-    <div class="container row categories_list">
-    </div>
-    <div class="modal fade" id="listModalToggle" aria-hidden="true" aria-labelledby="listModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title fs-5" id="listModalToggleLabel">Nouvelle liste</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-                <label class="form-label" for="list-name">Nom de la liste: </label>
-                <input class="form-control mb-4" type="text" name="name" id="list-name">
-                <span>Le nom doit contenir au moins 3 caractères</span>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary to-task-list" data-bs-target="#listModalToggle2" data-bs-toggle="modal" disabled>Ajouter une tache</button>
-                <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" id="checklist-validate" hidden>Valider</button>
-            </div>
-            </div>
+        <div class="container row categories_list">
         </div>
+        <div class="modal fade" id="listModalToggle" aria-hidden="true" aria-labelledby="listModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="listModalToggleLabel">Nouvelle liste</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    <label class="form-label" for="list-name">Nom de la liste: </label>
+                    <input class="form-control mb-4" type="text" name="name" id="list-name">
+                    <span>Le nom doit contenir au moins 3 caractères</span>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary to-task-list" data-bs-target="#listModalToggle2" data-bs-toggle="modal" disabled>Ajouter une tache</button>
+                    <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" id="checklist-validate" hidden>Valider</button>
+                </div>
+                </div>
+            </div>
         </div>
         <div class="modal fade" id="listModalToggle2" aria-hidden="true" aria-labelledby="listModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title fs-5" id="listModalToggleLabel2">Ajouter une tâche</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                
-            </div>
-            <div class="modal-body">
-                <label class="form-label" for="task-name">Nom de la tâche: </label>
-                <input class="form-control mb-4" type="text" name="name" id="task-name" required>
-                <ul class="task-list"></ul>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary add-new-task" disabled>Ajouter une nouvelle tâche</button>
-                <button class="btn btn-primary add-new-task"   data-bs-target="#listModalToggle" data-bs-toggle="modal" disabled>Valider</button>
-                
-            </div>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="listModalToggleLabel2">Ajouter une tâche</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    
+                </div>
+                <div class="modal-body">
+                    <label class="form-label" for="task-name">Nom de la tâche: </label>
+                    <input class="form-control mb-4" type="text" name="name" id="task-name" required>
+                    <ul class="task-list"></ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary add-new-task" disabled>Ajouter une nouvelle tâche</button>
+                    <button class="btn btn-primary add-new-task"   data-bs-target="#listModalToggle" data-bs-toggle="modal" disabled>Valider</button>
+                    
+                </div>
+                </div>
             </div>
         </div>
+        <div class="overlay" hidden></div>
+        <div class="form-edit" hidden>
+            <div class="modal-header">
+                <h2 class="modal-title fs-5">Modifier une liste</h2>
+                <button type="button" class="btn-close" ></button>
+                
+            </div>
+            
+            <label class="form-label mt-4" for="list-name-edit">Nom de la liste: </label>
+            <input class="form-control mb-4" type="text" name="name" id="list-name-edit">
+            <ul class="task-list-edit">
+
+            </ul>
+            <button class="btn btn-primary btn-checklist-edit">Enregistrer</button>
         </div>
     </main>
     <footer class=" d-flex justify-content-center">

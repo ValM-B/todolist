@@ -38,6 +38,14 @@ i{
     border : solid 1px #ca89f6;
 }
 
+.btn-edit{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #8841b8;
+    width:40px;
+}
+
 footer .btn{
     width: auto;
     font-size: 0.6rem;
@@ -80,6 +88,7 @@ footer .btn{
     margin: 1rem 0;
     padding: 1rem;
     border: solid 1px #ca89f6;
+    position: relative;
 }
 
 h2{
@@ -98,4 +107,24 @@ h2{
 .checked{
     color: rgb(129, 129, 129);
     text-decoration:line-through
+}
+
+.form-edit{
+    position: fixed;
+    top: 100px;
+    right: calc(50% - 200px);
+    width: 400px;
+    background-color: white;
+    border: lightgrey 1px solid;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Couleur semi-transparente */
 }

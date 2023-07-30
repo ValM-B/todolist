@@ -1,3 +1,4 @@
+import { editChecklist } from "./editChecklist.js";
 import { finishedTasks } from "./finishedTasks.js";
 
 export const checklistList = {
@@ -38,11 +39,17 @@ export const checklistList = {
         const newDiv = document.createElement("div");
         newDiv.classList.add("col__item");
         newDiv.id="col-checklist-"+checklist.id;
+        const btnEdit = document.createElement("button");
+        const btnIcon = document.createElement("i");
+        btnIcon.classList.add("fa-solid", "fa-pen")
+        btnEdit.append(btnIcon);
+        btnEdit.classList.add("btn", "btn-edit");
         const h2 = document.createElement("h2");
         h2.textContent = checklist.name;
-        newDiv.append(h2);
+        newDiv.append(h2, btnEdit);
         colCategory.append(newDiv);
         checklistList.addTasks(checklist);
+        editChecklist.init();
     },
 
     addTasks: function(checklist){
