@@ -1,3 +1,4 @@
+import { checklistList } from "./checklictList.js";
 import { newList } from "./newList.js";
 export const categoriesList ={
 
@@ -12,6 +13,7 @@ export const categoriesList ={
                 
                     categoriesList.addToCategoriesList(category);
                 });
+                checklistList.init();
             })
             .catch(error => {
 				return error;
@@ -27,7 +29,7 @@ export const categoriesList ={
     addToCategoriesList: function(category){
 
         const newCol = document.createElement("div");
-        newCol.classList.add("col-md-3", "categ-id-"+category.id);
+        newCol.classList.add("col-md-3", "col-category", "categ-id-"+category.id);
         categoriesList.container.append(newCol);
 
         const btnCateg = document.createElement("button");
@@ -42,7 +44,8 @@ export const categoriesList ={
         btnIcon.classList.add ("fa-solid", category.picture);
         btnCateg.prepend(btnIcon);
         newList.init();
-     
+        
+
     }
 
 }

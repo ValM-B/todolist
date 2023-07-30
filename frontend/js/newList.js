@@ -3,87 +3,78 @@ import {finishedTasks} from "./finishedTasks.js";
 export const newList = {
 
     categoryId : null,
+    btnValidate : null,
     btnAddList: null,
     btnTaskList: null,
+    btnNewTask: null,
     containerTaskList: null,
     newList: null,
+    listName: null,
+    taskName:null,
 
     init :function(){
         newList.containerTaskList = document.querySelector(".task-list");
+
         const btns = document.querySelectorAll(".add-list");
-        newList.btnTaskList= document.querySelector(".to-task-list");
-        const btnNewTask= document.querySelectorAll(".add-new-task");
         for (const btn of btns) {
             btn.addEventListener("click", newList.handleClick);
         }
-        
-        btnNewTask.forEach(btn => {
+        newList.btnTaskList= document.querySelector(".to-task-list");
+        newList.btnTaskList.addEventListener("click", newList.handleClickTaskList);
+
+        newList.btnValidate= document.querySelector("#checklist-validate");
+        newList.btnValidate.addEventListener("click", () => {
+            newList.btnValidate.hidden = true;
+        });
+
+        newList.btnNewTask= document.querySelectorAll(".add-new-task");
+        newList.btnNewTask.forEach(btn => {
             btn.addEventListener("click", newList.handleClickAddTask);
         });
-        newList.btnTaskList.addEventListener("click", newList.handleClickTaskList);
+        
+        newList.listName = document.querySelector("#list-name");
+        newList.listName.addEventListener('input', () => {
+            const value = newList.listName.value.trim();
+            if(value.length >= 3){
+                newList.btnTaskList.disabled = false;
+            } else {
+                newList.btnTaskList.disabled = true;
+            }
+        })
+        
     },
 
     handleClick : function(event){
 
         const btnId = event.currentTarget.id;
         newList.categoryId = btnId.slice(9)
-        // const container = document.querySelector(`.${btnId}`)
-        // console.log(container);
-        // newList.newDiv = document.createElement("div");
-        // newList.newDiv.classList.add("col__item");
-        // const h2 = document.createElement("h2");
-        // newList.title = prompt("Entrer le nom de la liste");
-        // h2.textContent = newList.title;
-        // newList.newDiv.append(h2);
-        // container.append(newList.newDiv);
-        // newList.createTask()
-
+    
     },
 
-    // createTask : function(){
-    //     newList.newTasks = [];
-    //     let createNewTask = false
-        
-    //     do {
-    //         newList.newTasks.push(prompt("Entrer une nouvelle tache."))
-    //         createNewTask = confirm("Créer une nouvelle tache ?")
-    //     } while (createNewTask);
-    //     newList.createList();
-        
-        
-        
-    // },
-
-    // createList : function(){
-
-    //     const newUl = document.createElement("ul");
-    //     for (let index = 0; index < newList.newTasks.length; index++) {
-            
-    //         const newLi = document.createElement("li");
-    //         const newCheckbox = document.createElement("input");
-    //         const newLabel = document.createElement("label");
-    //         newLi.append(newCheckbox, newLabel);            
-    //         newCheckbox.id = `tache_${newList.title}_${index}`;
-    //         newCheckbox.type = "checkbox";
-    //         newLabel.setAttribute("for", newCheckbox.id);
-    //         newLabel.textContent = newList.newTasks[index];
-    //         newLabel.id = `${newCheckbox.id}_label`
-    //         newUl.append(newLi);
-    //     }
-        
-    //     newList.newDiv.append(newUl);
-    //     finishedTasks.init();
-    // },
-
     handleClickTaskList: function(){
-        if(newList.containerTaskList.childElementCount === 0){
-            const listToAdd = {
-                name: document.getElementById("list-name").value,
-                category_id: newList.categoryId
+
+        newList.taskName = document.querySelector("#task-name");
+        newList.taskName.addEventListener('input', () => {
+            const value = newList.taskName.value.trim();
+            if(value.length >= 3){
+                newList.btnNewTask.forEach(btn => {
+                    btn.disabled = false;
+                });
+            } else {
+                btn.disabled = true;
             }
-            newList.addList(listToAdd);
+        })
+            if(newList.newList === null){
             
-        }
+                const listToAdd = {
+                    name: newList.listName.value,
+                    category_id: newList.categoryId
+                }
+                
+                newList.addList(listToAdd);
+                
+            }
+        
     },
 
     addList: async function(listToAdd){
@@ -128,6 +119,7 @@ export const newList = {
             newLi.textContent = taskToAdd.name;
             newList.containerTaskList.append(newLi);
             document.getElementById("task-name").value ="";
+            newList.btnValidate.hidden=false;
         }
     }
 }

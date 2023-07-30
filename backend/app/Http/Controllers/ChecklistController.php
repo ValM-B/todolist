@@ -46,7 +46,7 @@ class ChecklistController extends Controller
      */
     public function show(string $id)
     {
-        return Checklist::find($id)->load('category', 'tasks');
+        return Checklist::findOrFail($id)->load('category', 'tasks');
     }
 
     /**
