@@ -1,3 +1,4 @@
+import { checklistList } from "./checklictList.js";
 import {finishedTasks} from "./finishedTasks.js";
 
 export const newList = {
@@ -21,11 +22,11 @@ export const newList = {
         }
         newList.btnTaskList= document.querySelector(".to-task-list");
         newList.btnTaskList.addEventListener("click", newList.handleClickTaskList);
+        console.log(newList.btnTaskList)
 
         newList.btnValidate= document.querySelector("#checklist-validate");
-        newList.btnValidate.addEventListener("click", () => {
-            newList.btnValidate.hidden = true;
-        });
+        console.log(newList.btnValidate)
+        newList.btnValidate.addEventListener("click", newList.handleClickValidate);
 
         newList.btnNewTask= document.querySelectorAll(".add-new-task");
         newList.btnNewTask.forEach(btn => {
@@ -42,6 +43,15 @@ export const newList = {
             }
         })
         
+    },
+
+    handleClickValidate: function(){
+        newList.btnValidate.hidden = true;
+        const colCategory = document.querySelector(".categ-id-"+newList.categoryId);
+        while (colCategory.children.length>1) {
+            colCategory.removeChild(colCategory.children[1]);
+        }
+        checklistList.displayChecklist(colCategory);
     },
 
     handleClick : function(event){
@@ -61,7 +71,9 @@ export const newList = {
                     btn.disabled = false;
                 });
             } else {
-                btn.disabled = true;
+                newList.btnNewTask.forEach(btn => {
+                    btn.disabled = true;
+                });
             }
         })
             if(newList.newList === null){
@@ -95,7 +107,9 @@ export const newList = {
     },
 
     handleClickAddTask: function(){
-        console.log(newList.newList.id)
+        newList.btnNewTask.forEach(btn => {
+            btn.disabled = true;
+        });
         const taskToAdd = {
             name: document.getElementById("task-name").value,
             checklist_id: newList.newList.id

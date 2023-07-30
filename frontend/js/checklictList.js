@@ -9,8 +9,13 @@ export const checklistList = {
         checklistList.container = document.querySelectorAll(".col-category");
       
         checklistList.container.forEach(colCategory => {
+            checklistList.displayChecklist(colCategory);
+           
+        });
+    },
 
-            const categoryId = colCategory.firstChild.id.slice(9);
+    displayChecklist: function(colCategory){
+        const categoryId = colCategory.firstChild.id.slice(9);
             checklistList.getDataCategory(categoryId)
                 .then(data => {
                 
@@ -22,9 +27,8 @@ export const checklistList = {
                 .catch(error => {
                     return error;
                 })
-        });
     },
-
+    
     getDataCategory: async function(categoryId){
         const response = await fetch("http://127.0.0.1:8000/api/categories/"+categoryId);
         return await response.json();
@@ -42,7 +46,6 @@ export const checklistList = {
     },
 
     addTasks: function(checklist){
-        console.log(checklist)
         checklistList.getDataChecklist(checklist.id)
         .then(data => {
             const newUl = document.createElement("ul");

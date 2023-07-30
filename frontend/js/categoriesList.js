@@ -45,7 +45,7 @@ export const categoriesList ={
         btnCateg.prepend(btnIcon);
         newList.init();
         
-
+     
     }
 
 }
