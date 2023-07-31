@@ -29,11 +29,12 @@ class TaskController extends Controller
             'checklist_id' => 'required|integer|exists:checklists,id'
         ]);
 
-        Task::create($validated);
+        $task = Task::create($validated);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Task created!'
+            'message' => 'Task created!',
+            'task' => $task->load('checklist')
         ], 201); 
     }
 

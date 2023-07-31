@@ -117,14 +117,7 @@ export const newList = {
     },
 
     addTask: async function(taskToAdd){
-        const response= await fetch("http://127.0.0.1:8000/api/tasks", {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(taskToAdd)
-        });
-
+        const response= await newList.addTaskInDB(taskToAdd);
         const data = await response.json();
         if(data.status === "success"){
             const newLi = document.createElement("li");
@@ -133,5 +126,15 @@ export const newList = {
             document.getElementById("task-name").value ="";
             newList.btnValidate.hidden=false;
         }
+    }, 
+
+    addTaskInDB: async function(taskToAdd){
+        return await fetch("http://127.0.0.1:8000/api/tasks", {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(taskToAdd)
+        });
     }
 }

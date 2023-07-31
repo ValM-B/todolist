@@ -1,4 +1,5 @@
 import { checklistList } from "./checklistList.js";
+import { newList } from "./newList.js";
 
 export const editChecklist = {
 
@@ -7,10 +8,6 @@ export const editChecklist = {
     containerChecklist: null,
     checklist: null,
     checklistId:  null,
-/** TODO à terminer : 
- * 
- * ajouter un bouton d'ajout de tache
-*/
 
     init: function(){
     
@@ -30,6 +27,9 @@ export const editChecklist = {
 
         const btnUpdate = document.querySelector(".btn-checklist-edit");
         btnUpdate.addEventListener("click", editChecklist.handleClickUpdate);
+
+        const btnAddTask = document.querySelector(".form-edit .add-task");
+        btnAddTask.addEventListener("click", editChecklist.handleClickAddTask);
         
     },
 
@@ -37,7 +37,6 @@ export const editChecklist = {
         editChecklist.formEdit.hidden=false;
         editChecklist.overlay.hidden=false;
         editChecklist.containerChecklist = event.currentTarget.parentNode
-        console.log(event.currentTarget.parentNode);
         editChecklist.checklistId = editChecklist.containerChecklist.id.slice(14);
         editChecklist.initForm();
 
@@ -66,32 +65,47 @@ export const editChecklist = {
         })
     },
 
+    handleClickAddTask: function(){
+        
+        document.querySelector(".form-edit-task").hidden = false;
+        editChecklist.formEdit.hidden = true;
+
+        const btnSave = document.querySelector(".form-edit-task .btn-checklist-edit");
+        btnSave.addEventListener("click", editChecklist.addTask);
+    },
+
     initForm: function(){
 
         editChecklist.getTask()
             .then(data => {
                 editChecklist.checklist = data;
                 document.querySelector("#list-name-edit").value = data.name;
-                const taskList = document.querySelector(".task-list-edit");
+                
                 data.tasks.forEach(task => {
-                    const newLi = document.createElement("li");
-                    newLi.textContent = task.name;
-                    newLi.id="edit-task-"+task.id;
-                    const btn = document.createElement("button");
-                    btn.classList.add("btn", "btn-close");
-                    btn.id = "btn-delete-task-"+
-                    newLi.append(btn);
-                    taskList.append(newLi);
-                    btn.addEventListener("click", () => {
-                        editChecklist.handleClickDelete(task.id, newLi);
+                    editChecklist.displayTasks(task);
                     });
                 });
-            })
+            
     },
 
     getTask: async function(){
         const response = await fetch(`http://127.0.0.1:8000/api/checklists/${editChecklist.checklistId}`);
         return await response.json();
+    },
+
+    displayTasks: function(task){
+        console.log(task);
+        const newLi = document.createElement("li");
+        newLi.textContent = task.name;
+        newLi.id="edit-task-"+task.id;
+        const btn = document.createElement("button");
+        btn.classList.add("btn", "btn-close");
+        btn.id = "btn-delete-task-"+
+        newLi.append(btn);
+        document.querySelector(".task-list-edit").append(newLi);
+        btn.addEventListener("click", () => {
+            editChecklist.handleClickDelete(task.id, newLi);
+        });
     },
 
     handleClickDelete: function(taskId, taskLi){
@@ -122,5 +136,21 @@ export const editChecklist = {
         });
 
         return await response.json();
+    },
+
+    addTask : async function(){
+        const taskName = document.querySelector(".form-edit-task input").value;
+        document.querySelector(".form-edit-task").hidden = true;
+        editChecklist.formEdit.hidden = false;
+
+        const taskToAdd = {
+            name: taskName,
+            checklist_id: editChecklist.checklistId
+        }
+        const response= await newList.addTaskInDB(taskToAdd);
+        const data = await response.json();
+        if(data.status === "success"){
+            editChecklist.displayTasks(data.task);
+        }
     }
 }

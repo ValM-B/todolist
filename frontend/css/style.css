@@ -109,7 +109,8 @@ h2{
     text-decoration:line-through
 }
 
-.form-edit{
+.form-edit,
+.form-edit-task{
     position: fixed;
     top: 100px;
     right: calc(50% - 200px);
