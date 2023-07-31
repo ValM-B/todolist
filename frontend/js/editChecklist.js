@@ -1,4 +1,5 @@
 import { checklistList } from "./checklistList.js";
+import { deleteChecklist } from "./deleteChecklist.js";
 import { newList } from "./newList.js";
 
 export const editChecklist = {
@@ -31,6 +32,8 @@ export const editChecklist = {
         const btnAddTask = document.querySelector(".form-edit .add-task");
         btnAddTask.addEventListener("click", editChecklist.handleClickAddTask);
         
+        const btnDelete = document.querySelector(".btn-checklist-delete");
+        btnDelete.addEventListener("click", editChecklist.handleClickDeleteChecklist);
     },
 
     handleClick: function(event){
@@ -46,6 +49,7 @@ export const editChecklist = {
         editChecklist.formEdit.hidden=true;
         editChecklist.overlay.hidden=true;
         checklistList.addToChecklistList(editChecklist.checklist, editChecklist.containerChecklist.parentNode);
+        document.querySelector(".task-list-edit").innerHTML = '';
         editChecklist.containerChecklist.remove();
         
         
@@ -74,9 +78,20 @@ export const editChecklist = {
         btnSave.addEventListener("click", editChecklist.addTask);
     },
 
+    handleClickDeleteChecklist: function(){
+        editChecklist.formEdit.hidden = true;
+        editChecklist.overlay.hidden=true;
+        editChecklist.containerChecklist.remove();
+        document.querySelector(".task-list-edit").innerHTML = '';
+        editChecklist.getChecklist()
+            .then(data => {
+                deleteChecklist.deleteChecklist(data);
+            });
+    },
+
     initForm: function(){
 
-        editChecklist.getTask()
+        editChecklist.getChecklist()
             .then(data => {
                 editChecklist.checklist = data;
                 document.querySelector("#list-name-edit").value = data.name;
@@ -88,13 +103,13 @@ export const editChecklist = {
             
     },
 
-    getTask: async function(){
+    getChecklist: async function(){
         const response = await fetch(`http://127.0.0.1:8000/api/checklists/${editChecklist.checklistId}`);
         return await response.json();
     },
 
     displayTasks: function(task){
-        console.log(task);
+        
         const newLi = document.createElement("li");
         newLi.textContent = task.name;
         newLi.id="edit-task-"+task.id;

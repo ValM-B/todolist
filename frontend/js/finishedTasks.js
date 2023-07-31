@@ -1,9 +1,9 @@
 import {finishedList} from "./finishedList.js";
 
 export const finishedTasks = {
-
+	parentUl: null,
 	init : function(){
-		const checkboxs = document.querySelectorAll("input");
+		const checkboxs = document.querySelectorAll(".col-category input");
 		
 		for (const checkbox of checkboxs) {
 			checkbox.addEventListener("change", finishedTasks.handleChange);
@@ -12,43 +12,46 @@ export const finishedTasks = {
 
 	},
 
-	// handleChange : function(event){
-	// 	finishedTasks.checkbox = document.getElementById(event.currentTarget.id);
-	// 	const label = document.getElementById(`${finishedTasks.checkbox.id}_label`)
-	// 	if(event.currentTarget.checked){
-			
-	// 		label.className ="checked";
-	// 	} else {
-	// 		label.className = "";
-	// 	}
-
-	// 	finishedTasks.parentUl = finishedTasks.checkbox.parentNode.parentNode;
-	// 	const inputs = finishedTasks.parentUl.querySelectorAll("input");
-	// 	let allInputsChecked = true;
-
-	// 	for (const input of inputs) {
-	// 		if(!input.checked){
-	// 			allInputsChecked = false;
-	// 		}
-	// 	}
-	// 	console.log(allInputsChecked);
+	handleChange : function(event){
+		console.log("ok");
+		const checkbox = event.currentTarget;
 		
-	// 	if(allInputsChecked){
-	// 		finishedTasks.addBtn()
-	// 	}
+		const label = document.getElementById(`${checkbox.id}-label`)
+		
+		if(checkbox.checked){
+			
+			label.classList.add ("checked");
+		} else {
+			label.classList.remove("checked");
+		}
+
+		finishedTasks.parentUl = checkbox.parentNode.parentNode;
+		const inputs = finishedTasks.parentUl.querySelectorAll("input");
+		let allInputsChecked = true;
+
+		for (const input of inputs) {
+			if(!input.checked){
+				allInputsChecked = false;
+			}
+		}
+		
+		
+		if(allInputsChecked){
+			finishedTasks.addBtn()
+		}
 		
 				
-	// },
+	},
 
-	// addBtn : function(){
-	// 	finishedTasks.parentDiv = finishedTasks.parentUl.parentNode;
-	// 	const btnFinishedList = document.createElement("button");
-	// 	const canvas = document.createElement("canvas")
-	// 	canvas.classList.add("confetti-canvas")
-	// 	btnFinishedList.classList.add("btn_remove");
-	// 	btnFinishedList.textContent = "Supprimer la liste";
-	// 	finishedTasks.parentDiv.append(btnFinishedList, canvas);
-	// 	finishedList.init();
-	// }
+	addBtn : function(){
+		finishedTasks.parentDiv = finishedTasks.parentUl.parentNode;
+		const btnFinishedList = document.createElement("button");
+		const canvas = document.createElement("canvas")
+		canvas.classList.add("confetti-canvas")
+		btnFinishedList.classList.add("btn_remove");
+		btnFinishedList.textContent = "Supprimer la liste";
+		finishedTasks.parentDiv.append(btnFinishedList, canvas);
+		finishedList.init();
+	}
 
 }

@@ -1,3 +1,5 @@
+import { checklistList } from "./checklistList.js";
+import { deleteChecklist } from "./deleteChecklist.js";
 
 
 export const finishedList = {
@@ -12,6 +14,12 @@ export const finishedList = {
 	},
 
 	handleclick : function(event){
+		const checklistIdToDelete = event.currentTarget.parentNode.id.slice(14)
+		
+		checklistList.getDataChecklist(checklistIdToDelete)
+		.then(data => {
+			deleteChecklist.deleteChecklist(data);
+		})
 		const xMouse = (event.clientX)/1000
 		const yMouse = (event.clientY)/1000 
 		const div = event.currentTarget.parentNode;
@@ -23,8 +31,8 @@ export const finishedList = {
 		});
 		myConfetti({
 			particleCount: 110,
-  			spread: 110,
-  			origin: { y:yMouse, x: xMouse}
+			spread: 110,
+			origin: { y:yMouse, x: xMouse}
 		});
 		
 	},

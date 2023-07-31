@@ -17,6 +17,15 @@
 
     </header>
     <main>
+        <div class="container">
+            <div class="alert alert-success success-delete" role="alert" hidden>
+                La suppression a bien été effectuée.
+            </div>
+        
+            <div class="alert alert-danger echec-delete" role="alert" hidden>
+                La supression a échoué
+            </div>
+        </div>
         <div class="container row categories_list">
         </div>
         <div class="modal fade" id="listModalToggle" aria-hidden="true" aria-labelledby="listModalToggleLabel" tabindex="-1">
@@ -75,6 +84,7 @@
             </ul>
             <button class="btn btn-primary add-task">Ajouter une tâche</button>
             <button class="btn btn-primary btn-checklist-edit">Enregistrer</button>
+            <button class="btn btn-primary btn-checklist-delete">Supprimer</button>
         </div>
         <div class="form-edit-task" hidden>
             <div class="modal-header">
