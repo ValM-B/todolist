@@ -1,7 +1,7 @@
 import { checklistList } from "./checklistList.js";
 import {finishedTasks} from "./finishedTasks.js";
 
-export const newList = {
+export const addChecklist = {
 
     categoryId : null,
     btnValidate : null,
@@ -14,74 +14,78 @@ export const newList = {
     taskName:null,
 
     init :function(){
-        newList.containerTaskList = document.querySelector(".task-list");
+        addChecklist.containerTaskList = document.querySelector(".task-list");
 
         const btns = document.querySelectorAll(".add-list");
         for (const btn of btns) {
-            btn.addEventListener("click", newList.handleClick);
+            btn.addEventListener("click", addChecklist.handleClick);
         }
-        newList.btnTaskList= document.querySelector(".to-task-list");
-        newList.btnTaskList.addEventListener("click", newList.handleClickTaskList);
+        addChecklist.btnTaskList= document.querySelector(".to-task-list");
+        addChecklist.btnTaskList.addEventListener("click", addChecklist.handleClickTaskList);
 
-        newList.btnValidate= document.querySelector("#checklist-validate");
-        newList.btnValidate.addEventListener("click", newList.handleClickValidate);
+        addChecklist.btnValidate= document.querySelector("#checklist-validate");
+        addChecklist.btnValidate.addEventListener("click", addChecklist.handleClickValidate);
 
-        newList.btnNewTask= document.querySelectorAll(".add-new-task");
-        newList.btnNewTask.forEach(btn => {
-            btn.addEventListener("click", newList.handleClickAddTask);
+        addChecklist.btnNewTask= document.querySelectorAll(".add-new-task");
+        addChecklist.btnNewTask.forEach(btn => {
+            btn.addEventListener("click", addChecklist.handleClickAddTask);
         });
         
-        newList.listName = document.querySelector("#list-name");
-        newList.listName.addEventListener('input', () => {
-            const value = newList.listName.value.trim();
+        addChecklist.listName = document.querySelector("#list-name");
+        addChecklist.listName.addEventListener('input', () => {
+            const value = addChecklist.listName.value.trim();
             if(value.length >= 3){
-                newList.btnTaskList.disabled = false;
+                addChecklist.btnTaskList.disabled = false;
             } else {
-                newList.btnTaskList.disabled = true;
+                addChecklist.btnTaskList.disabled = true;
             }
         })
         
     },
 
     handleClickValidate: function(){
-        newList.btnValidate.hidden = true;
-        const colCategory = document.querySelector(".categ-id-"+newList.categoryId);
+        addChecklist.btnValidate.hidden = true;
+        const colCategory = document.querySelector(".categ-id-"+addChecklist.categoryId);
+        addChecklist.listName.value = "";
+        addChecklist.containerTaskList.innerHTML = "";
+        addChecklist.newList=null;
         while (colCategory.children.length>1) {
             colCategory.removeChild(colCategory.children[1]);
         }
         checklistList.displayChecklist(colCategory);
+        
     },
 
     handleClick : function(event){
 
         const btnId = event.currentTarget.id;
-        newList.categoryId = btnId.slice(9)
+        addChecklist.categoryId = btnId.slice(9)
     
     },
 
     handleClickTaskList: function(){
 
-        newList.taskName = document.querySelector("#task-name");
-        newList.taskName.addEventListener('input', () => {
-            const value = newList.taskName.value.trim();
+        addChecklist.taskName = document.querySelector("#task-name");
+        addChecklist.taskName.addEventListener('input', () => {
+            const value = addChecklist.taskName.value.trim();
             if(value.length >= 3){
-                newList.btnNewTask.forEach(btn => {
+                addChecklist.btnNewTask.forEach(btn => {
                     btn.disabled = false;
                 });
             } else {
-                newList.btnNewTask.forEach(btn => {
+                addChecklist.btnNewTask.forEach(btn => {
                     btn.disabled = true;
                 });
             }
         })
-            if(newList.newList === null){
+            if(addChecklist.newList === null){
             
                 const listToAdd = {
-                    name: newList.listName.value,
-                    category_id: newList.categoryId
+                    name: addChecklist.listName.value,
+                    category_id: addChecklist.categoryId
                 }
                 
-                newList.addList(listToAdd);
+                addChecklist.addList(listToAdd);
                 
             }
         
@@ -100,31 +104,31 @@ export const newList = {
         
 
         if(data.status === "success"){
-			newList.newList = data.checklist;
+			addChecklist.newList = data.checklist;
         }
     },
 
     handleClickAddTask: function(){
-        newList.btnNewTask.forEach(btn => {
+        addChecklist.btnNewTask.forEach(btn => {
             btn.disabled = true;
         });
         const taskToAdd = {
             name: document.getElementById("task-name").value,
-            checklist_id: newList.newList.id
+            checklist_id: addChecklist.newList.id
         }
-        newList.addTask(taskToAdd);
+        addChecklist.addTask(taskToAdd);
 
     },
 
     addTask: async function(taskToAdd){
-        const response= await newList.addTaskInDB(taskToAdd);
+        const response= await addChecklist.addTaskInDB(taskToAdd);
         const data = await response.json();
         if(data.status === "success"){
             const newLi = document.createElement("li");
             newLi.textContent = taskToAdd.name;
-            newList.containerTaskList.append(newLi);
+            addChecklist.containerTaskList.append(newLi);
             document.getElementById("task-name").value ="";
-            newList.btnValidate.hidden=false;
+            addChecklist.btnValidate.hidden=false;
         }
     }, 
 

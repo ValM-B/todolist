@@ -20,8 +20,8 @@ export const finishedList = {
 		.then(data => {
 			deleteChecklist.deleteChecklist(data);
 		})
-		const xMouse = (event.clientX)/1000
-		const yMouse = (event.clientY)/1000 
+		const xMouse = (event.clientX)/1400
+		const yMouse = (event.clientY)/1400 
 		const div = event.currentTarget.parentNode;
 		const canvas = document.querySelector('#confetti-canvas');
 		div.remove();

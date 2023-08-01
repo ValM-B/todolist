@@ -1,6 +1,6 @@
 import { checklistList } from "./checklistList.js";
 import { deleteChecklist } from "./deleteChecklist.js";
-import { newList } from "./newList.js";
+import { addChecklist} from "./addChecklist.js";
 
 export const editChecklist = {
 
@@ -162,7 +162,7 @@ export const editChecklist = {
             name: taskName,
             checklist_id: editChecklist.checklistId
         }
-        const response= await newList.addTaskInDB(taskToAdd);
+        const response= await addChecklist.addTaskInDB(taskToAdd);
         const data = await response.json();
         if(data.status === "success"){
             editChecklist.displayTasks(data.task);

@@ -1,4 +1,4 @@
-import { newList } from "./newList.js";
+import { addChecklist} from "./addChecklist.js";
 import {finishedTasks} from "./finishedTasks.js";
 import { categoriesList } from "./categoriesList.js";
 import { addCategory } from "./addCategory.js";
@@ -11,7 +11,7 @@ const app = {
     categoriesList.init();
     addCategory.init();
     deleteCategory.init();
-    newList.init();
+    addChecklist.init();
     deleteChecklist.init();
 
     }
@@ -20,9 +20,9 @@ const app = {
 document.addEventListener("DOMContentLoaded", app.init);
 
 /**
- * les checkboxs de la derniere catégory ne se rayent pas quand on les checked
+ * voir si je peux duppliquer un model de chekclist plutot que creer et ajouter le bouton de suppression en hidden des le depart
  * 
- * une catégorie ne se surrpime pas en db si on la supprime.
+ * 
  * 
  * les bouton supprimer liste ne disparait pas si on dechecke une tache
  */

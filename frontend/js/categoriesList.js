@@ -1,5 +1,5 @@
 import { checklistList } from "./checklistList.js";
-import { newList } from "./newList.js";
+import { addChecklist} from "./addChecklist.js";
 export const categoriesList ={
 
     container : null,
@@ -43,7 +43,7 @@ export const categoriesList ={
         const btnIcon = document.createElement("i");
         btnIcon.classList.add ("fa-solid", category.picture);
         btnCateg.prepend(btnIcon);
-        newList.init();
+        addChecklist.init();
         
      
     }

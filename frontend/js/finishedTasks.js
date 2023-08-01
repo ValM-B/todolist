@@ -2,18 +2,10 @@ import {finishedList} from "./finishedList.js";
 
 export const finishedTasks = {
 	parentUl: null,
-	// init : function(){
-	// 	const checkboxs = document.querySelectorAll(".col-category input");
-		
-	// 	for (const checkbox of checkboxs) {
-	// 		console.log(checkbox);
-	// 		checkbox.addEventListener("change", finishedTasks.handleChange);
-	// 	}
-		
 
-	// },
 
 	handleChange : function(event){
+		let allInputsChecked = true;
 		console.log("ok");
 		const checkbox = event.currentTarget;
 		
@@ -24,15 +16,18 @@ export const finishedTasks = {
 			label.classList.add ("checked");
 		} else {
 			label.classList.remove("checked");
+			
+
 		}
 
 		finishedTasks.parentUl = checkbox.parentNode.parentNode;
 		const inputs = finishedTasks.parentUl.querySelectorAll("input");
-		let allInputsChecked = true;
+		
 
 		for (const input of inputs) {
 			if(!input.checked){
 				allInputsChecked = false;
+				
 			}
 		}
 		
@@ -52,6 +47,7 @@ export const finishedTasks = {
 		btnFinishedList.classList.add("btn_remove");
 		btnFinishedList.textContent = "Supprimer la liste";
 		finishedTasks.parentDiv.append(btnFinishedList, canvas);
+		document.querySelector(".btn_remove").hidden = false;
 		finishedList.init();
 	}
 
