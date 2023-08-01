@@ -63,12 +63,13 @@ export const checklistList = {
                 const newLabel = document.createElement("label");
                 newLi.append(newCheckbox, newLabel); 
                 newCheckbox.id = `task-${task.id}`;
-                newCheckbox.type = "checkbox";           
+                newCheckbox.type = "checkbox"; 
+                newCheckbox.addEventListener("change", finishedTasks.handleChange);
                 newLabel.setAttribute("for", newCheckbox.id);
                 newLabel.textContent = task.name;
                 newLabel.id = `${newCheckbox.id}-label`
                 newUl.append(newLi);
-                finishedTasks.init();
+                
             });
             document.getElementById("col-checklist-"+checklist.id).append(newUl);
         })

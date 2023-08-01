@@ -10,7 +10,6 @@ const app = {
     init : function(){
     categoriesList.init();
     addCategory.init();
-    finishedTasks.init();
     deleteCategory.init();
     newList.init();
     deleteChecklist.init();

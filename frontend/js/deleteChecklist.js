@@ -12,12 +12,7 @@ export const deleteChecklist = {
     },
 
     deleteChecklist: function(checklist){
-        
-        if(checklist.tasks){
-            checklist.tasks.forEach(task => {
-                editChecklist.deleteTask(task.id);
-            });
-        }
+
 
         deleteChecklist.deleteChecklistinDB(checklist)
         .then(() => {

@@ -2,15 +2,16 @@ import {finishedList} from "./finishedList.js";
 
 export const finishedTasks = {
 	parentUl: null,
-	init : function(){
-		const checkboxs = document.querySelectorAll(".col-category input");
+	// init : function(){
+	// 	const checkboxs = document.querySelectorAll(".col-category input");
 		
-		for (const checkbox of checkboxs) {
-			checkbox.addEventListener("change", finishedTasks.handleChange);
-		}
+	// 	for (const checkbox of checkboxs) {
+	// 		console.log(checkbox);
+	// 		checkbox.addEventListener("change", finishedTasks.handleChange);
+	// 	}
 		
 
-	},
+	// },
 
 	handleChange : function(event){
 		console.log("ok");

@@ -69,7 +69,12 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $categoryToDelete = Category::findOrFail($id);
+        $categoryToDelete = Category::findOrFail($id)->load(['checklists']);
+        if($categoryToDelete["checklists"]){
+            foreach ($categoryToDelete["checklists"] as $checklist) {
+                ChecklistController::destroy($checklist["id"]);
+            }
+        }
         $categoryToDelete->delete();
         return response()->json([
             'status' => 'success',

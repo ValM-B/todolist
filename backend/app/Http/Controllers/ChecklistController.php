@@ -71,9 +71,15 @@ class ChecklistController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public static function destroy(string $id)
     {
-        $checklistToDelete = Checklist::findOrFail($id);
+        $checklistToDelete = Checklist::findOrFail($id)->load('category', 'tasks');
+        
+        if($checklistToDelete['tasks']){
+            foreach ($checklistToDelete['tasks'] as $task) {
+                TaskController::destroy($task["id"]);
+            }
+        }
         $checklistToDelete->delete();
     }
 }
