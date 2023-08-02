@@ -5,8 +5,8 @@ import { deleteChecklist } from "./deleteChecklist.js";
 export const finishedList = {
 
 	init : function(){
-		const buttons = document.querySelectorAll(".btn_remove");
-		
+		const buttons = document.querySelectorAll(".btn-delete-checklist");
+		console.log(buttons);
 		for (const button of buttons) {
 			button.addEventListener("click", finishedList.handleclick)
 			
@@ -20,8 +20,6 @@ export const finishedList = {
 		.then(data => {
 			deleteChecklist.deleteChecklist(data);
 		})
-		const xMouse = (event.clientX)/1400
-		const yMouse = (event.clientY)/1400 
 		const div = event.currentTarget.parentNode;
 		const canvas = document.querySelector('#confetti-canvas');
 		div.remove();
@@ -32,7 +30,7 @@ export const finishedList = {
 		myConfetti({
 			particleCount: 110,
 			spread: 110,
-			origin: { y:yMouse, x: xMouse}
+			origin: { y:0.5, x: 0.5}
 		});
 		
 	},

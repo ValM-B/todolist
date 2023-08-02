@@ -36,18 +36,23 @@ export const checklistList = {
     },
 
     addToChecklistList: function(checklist, colCategory){
-        const newDiv = document.createElement("div");
-        newDiv.classList.add("col__item");
-        newDiv.id="col-checklist-"+checklist.id;
-        const btnEdit = document.createElement("button");
-        const btnIcon = document.createElement("i");
-        btnIcon.classList.add("fa-solid", "fa-pen")
-        btnEdit.append(btnIcon);
-        btnEdit.classList.add("btn", "btn-edit");
-        const h2 = document.createElement("h2");
-        h2.textContent = checklist.name;
-        newDiv.append(h2, btnEdit);
-        colCategory.append(newDiv);
+        
+        const checklistTemplate = document.querySelector("#checklist-template");
+        const checklistElement = checklistTemplate.content.cloneNode(true);
+        checklistElement.querySelector(".container-checklist").id = "col-checklist-"+checklist.id;
+        checklistElement.querySelector("h2").textContent = checklist.name;
+        //const newDiv = document.createElement("div");
+        //newDiv.classList.add("col__item");
+        //newDiv.id=
+        //const btnEdit = document.createElement("button");
+        //const btnIcon = document.createElement("i");
+        //btnIcon.classList.add("fa-solid", "fa-pen")
+       // btnEdit.append(btnIcon);
+        //btnEdit.classList.add("btn", "btn-edit");
+        //const h2 = document.createElement("h2");
+        //h2.textContent = 
+        //newDiv.append(h2, btnEdit);
+        colCategory.append(checklistElement);
         checklistList.addTasks(checklist);
         editChecklist.init();
     },
@@ -55,7 +60,9 @@ export const checklistList = {
     addTasks: function(checklist){
         checklistList.getDataChecklist(checklist.id)
         .then(data => {
-            const newUl = document.createElement("ul");
+            const checklistElement = document.querySelector(`#col-checklist-${checklist.id}`);
+            const taskListContainer = checklistElement.querySelector(`ul`);
+            console.log(taskListContainer);
             data.tasks.forEach(task => {
                 
                 const newLi = document.createElement("li");
@@ -65,13 +72,20 @@ export const checklistList = {
                 newCheckbox.id = `task-${task.id}`;
                 newCheckbox.type = "checkbox"; 
                 newCheckbox.addEventListener("change", finishedTasks.handleChange);
+                if(task.status == 0){
+                    newCheckbox.checked = true;
+                    newLabel.classList.add ("checked");
+                } else {
+                    checklistElement.querySelector(`.btn-delete-checklist`).hidden = true;
+                    checklistElement.querySelector(`.confetti-canvas`).hidden = true;
+                    checklistElement.querySelector(".btn-edit").hidden = false;
+                }
                 newLabel.setAttribute("for", newCheckbox.id);
                 newLabel.textContent = task.name;
                 newLabel.id = `${newCheckbox.id}-label`
-                newUl.append(newLi);
+                taskListContainer.append(newLi);
                 
             });
-            document.getElementById("col-checklist-"+checklist.id).append(newUl);
         })
         .catch(error => {
             return error;

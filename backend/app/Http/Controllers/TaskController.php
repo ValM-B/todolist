@@ -53,8 +53,9 @@ class TaskController extends Controller
     {
         $task = Task::findOrFail($id);
         $validated = $request->validate([
-            'name' => 'required|string|min:3|max:255',
-            'checklist_id' => 'integer|exists:checklists,id'
+            'name' => 'string|min:3|max:255',
+            'checklist_id' => 'integer|exists:checklists,id',
+            'status' => 'integer|min:0|max:1'
         ]);
         $task->update($validated);
         return response()->json([

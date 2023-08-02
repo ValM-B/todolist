@@ -96,6 +96,19 @@
             <input class="form-control mb-4" type="text" name="name" id="list-task-edit">
             <button class="btn btn-primary btn-checklist-edit">Enregistrer</button>
         </div>
+
+        <!-- Template de la checkliste -->
+        <template id="checklist-template">
+            <div class="container-checklist">
+                <h2></h2>
+                <button class="btn-edit btn" hidden>
+                    <i class="fa-solid fa-pen" ></i>
+                </button>
+                <ul class="container-tasks-list"></ul>
+                <button class="btn-delete-checklist">Supprimer la liste</button>
+                <canvas class="confetti-canvas"></canvas>
+            </div>
+        </template>
     </main>
     <footer class=" d-flex justify-content-center">
         <div class="alert alert-success add-category-success" role="alert" hidden>

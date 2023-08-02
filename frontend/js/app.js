@@ -20,7 +20,10 @@ const app = {
 document.addEventListener("DOMContentLoaded", app.init);
 
 /**
- * voir si je peux duppliquer un model de chekclist plutot que creer et ajouter le bouton de suppression en hidden des le depart
+ * voir si je peux duppliquer un model de chekclist plutot que creer et ajouter le bouton de suppression en hidden des le deparp - ok
+ * modifier lapparition et disparition du bouton lorsque les checkbox sont cochées
+ * 
+ * vérifier fonctionnement appliphp 
  * 
  * 
  * 

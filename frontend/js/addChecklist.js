@@ -117,6 +117,7 @@ export const addChecklist = {
             checklist_id: addChecklist.newList.id
         }
         addChecklist.addTask(taskToAdd);
+        document.getElementById("task-name").value ="";
 
     },
 
